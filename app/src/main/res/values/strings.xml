@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Parkee</string>
+    <string name="app_name">Parkee Technical Test</string>
+    <string name="error_no_connection">No internet connection</string>
+    <string name="error_timeout">Connection timeout, try again</string>
+    <string name="error_unauthorized">Something wrong when try to authenticate</string>
+    <string name="error_not_found">Data not found</string>
+    <string name="error_server">Unexpected server error, please try again</string>
+    <string name="error_unknown">Something wrong</string>
+    <string name="action_retry">Try again</string>
+    <string name="home_section_empty">No movie available</string>
 </resources>
