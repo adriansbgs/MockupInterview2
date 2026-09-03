@@ -1,4 +1,4 @@
-package com.example.parkee.ui.theme
+package com.example.parkee.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

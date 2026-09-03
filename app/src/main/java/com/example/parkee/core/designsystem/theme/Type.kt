@@ -1,4 +1,4 @@
-package com.example.parkee.ui.theme
+package com.example.parkee.core.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
