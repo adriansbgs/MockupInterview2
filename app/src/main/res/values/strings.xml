@@ -8,4 +8,8 @@
     <string name="error_unknown">Something wrong</string>
     <string name="action_retry">Try again</string>
     <string name="home_section_empty">No movie available</string>
+
+    <string name="home_section_popular">Popular Movie</string>
+    <string name="home_section_top_rated">Top Rated</string>
+    <string name="home_section_now_playing">Now Playing</string>
 </resources>
