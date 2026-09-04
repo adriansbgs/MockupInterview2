@@ -30,6 +30,7 @@ import com.example.parkee.domain.model.Movie
 fun HomeScreen(
     uiState: HomeUiState,
     onMovieClick: (Int) -> Unit,
+    onFavoriteListClick: () -> Unit,
     onRetrySection: (MovieSectionType) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -148,6 +149,7 @@ private fun HomeScreenPreview() {
                 topRated = SectionState.Success(dummyMovies),
                 nowPlaying = SectionState.Success(dummyMovies),
             ),
+            onFavoriteListClick = {},
             onMovieClick = {},
             onRetrySection = {},
         )
@@ -164,6 +166,7 @@ private fun HomeScreenPartialErrorPreview() {
                 topRated = SectionState.Error(AppError.NoConnection),
                 nowPlaying = SectionState.Loading,
             ),
+            onFavoriteListClick = {},
             onMovieClick = {},
             onRetrySection = {},
         )
