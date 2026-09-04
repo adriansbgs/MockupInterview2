@@ -8,7 +8,7 @@ data class MovieDetailDto(
     val id: Int,
     val title: String = "",
     val overview: String = "",
-    val tagline: String = "",
+    val tagline: String? = null,
     val runtime: Int? = null,
     val genres: List<GenreDto> = emptyList(),
     @SerialName("poster_path") val posterPath: String? = null,
