@@ -14,4 +14,9 @@
     <string name="home_section_now_playing">Now Playing</string>
 
     <string name="action_favorite_list">Favorite List</string>
+    <string name="action_back">Back</string>
+
+    <string name="no_review">No review available yet</string>
+    <string name="detail_description">Description</string>
+    <string name="detail_review">Review</string>
 </resources>
