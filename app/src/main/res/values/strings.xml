@@ -24,4 +24,8 @@
     <string name="detail_review">Review</string>
     <string name="favorite_empty_title">Favorite</string>
     <string name="favorite_empty_subtitle">Favorite still empty</string>
+
+    <string name="share_title">Share</string>
+    <string name="share_via_app">Share via App</string>
+    <string name="share_copy_link">Copy Link</string>
 </resources>
