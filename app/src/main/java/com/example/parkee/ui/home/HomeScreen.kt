@@ -10,13 +10,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.parkee.R
 import com.example.parkee.core.common.AppError
 import com.example.parkee.core.designsystem.component.EmptyState
@@ -34,36 +44,43 @@ fun HomeScreen(
     onRetrySection: (MovieSectionType) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        item {
-            MovieCarouselSection(
-                title = stringResource(R.string.home_section_popular),
-                state = uiState.popular,
-                onMovieClick = onMovieClick,
-                onRetry = { onRetrySection(MovieSectionType.POPULAR) },
-            )
-        }
+    Scaffold(
+        modifier = modifier,
+        topBar = { HomeTopBar(onFavoriteListClick = onFavoriteListClick) },
+    ) { padding ->
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(padding),
+            contentPadding = PaddingValues(vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            item {
+                MovieCarouselSection(
+                    title = stringResource(R.string.home_section_popular),
+                    state = uiState.popular,
+                    onMovieClick = onMovieClick,
+                    onRetry = { onRetrySection(MovieSectionType.POPULAR) },
+                )
+            }
 
-        item {
-            MovieCarouselSection(
-                title = stringResource(R.string.home_section_top_rated),
-                state = uiState.topRated,
-                onMovieClick = onMovieClick,
-                onRetry = { onRetrySection(MovieSectionType.TOP_RATED) },
-            )
-        }
+            item {
+                MovieCarouselSection(
+                    title = stringResource(R.string.home_section_top_rated),
+                    state = uiState.topRated,
+                    onMovieClick = onMovieClick,
+                    onRetry = { onRetrySection(MovieSectionType.TOP_RATED) },
+                )
+            }
 
-        item {
-            MovieCarouselSection(
-                title = stringResource(R.string.home_section_now_playing),
-                state = uiState.nowPlaying,
-                onMovieClick = onMovieClick,
-                onRetry = { onRetrySection(MovieSectionType.NOW_PLAYING) },
-            )
+            item {
+                MovieCarouselSection(
+                    title = stringResource(R.string.home_section_now_playing),
+                    state = uiState.nowPlaying,
+                    onMovieClick = onMovieClick,
+                    onRetry = { onRetrySection(MovieSectionType.NOW_PLAYING) },
+                )
+            }
         }
     }
 }
@@ -155,6 +172,39 @@ private fun HomeScreenPreview() {
         )
     }
 }
+
+
+@Composable
+fun HomeRoute(
+    onMovieClick: (Int) -> Unit,
+    onFavoriteListClick: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    HomeScreen(
+        uiState = uiState,
+        onMovieClick = onMovieClick,
+        onFavoriteListClick = onFavoriteListClick,
+        onRetrySection = viewModel::retrySection,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun HomeTopBar(onFavoriteListClick: () -> Unit) {
+    TopAppBar(
+        title = { Text(stringResource(R.string.app_name)) },
+        actions = {
+            IconButton(onClick = onFavoriteListClick) {
+                Icon(
+                    Icons.Default.Favorite,
+                    contentDescription = stringResource(R.string.action_favorite_list)
+                )
+            }
+        }
+    )
+}
+
 
 @Preview(widthDp = 360, heightDp = 800)
 @Composable
