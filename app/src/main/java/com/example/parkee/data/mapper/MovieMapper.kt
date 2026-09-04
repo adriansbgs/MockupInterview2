@@ -25,7 +25,7 @@ fun MovieDetailDto.toDomain(): MovieDetail = MovieDetail(
         overview = overview.ifBlank { "No Overview" },
         posterUrl = buildImageUrl(posterPath, ImageSize.POSTER_DETAIL),
         backdropUrl = buildImageUrl(backdropPath, ImageSize.BACKDROP),
-        releaseDate = releaseDate.toDisplayDate(),
+        releaseDate = releaseDate?.toDisplayDate() ?: "-",
         voteAverage = voteAverage
     ),
     runtimeMinutes = runtime,
