@@ -24,6 +24,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -40,6 +43,7 @@ import com.example.parkee.core.designsystem.theme.ParkeeTheme
 import com.example.parkee.domain.model.Movie
 import com.example.parkee.domain.model.MovieDetail
 import com.example.parkee.ui.detail.component.ReviewItem
+import com.example.parkee.ui.detail.component.ShareBottomSheet
 
 @Composable
 fun MovieDetailRoute(
@@ -64,6 +68,8 @@ fun MovieDetailScreen(
     onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var showShareSheet by remember { mutableStateOf(false) }
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -177,8 +183,15 @@ fun MovieDetailScreen(
                                     else MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
-                            IconButton(onClick = { /* TODO: share */ }) {
+                            IconButton(onClick = { showShareSheet = true }) {
                                 Icon(Icons.Default.Share, stringResource(R.string.action_share))
+                            }
+                            if (showShareSheet) {
+                                ShareBottomSheet(
+                                    movieTitle = uiState.detail.movie.title,
+                                    shareUrl = "https://www.themoviedb.org/movie/${uiState.detail.movie.id}",
+                                    onDismiss = { showShareSheet = false }
+                                )
                             }
                         }
                     }
