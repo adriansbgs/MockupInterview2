@@ -22,4 +22,6 @@
     <string name="no_review">No review available yet</string>
     <string name="detail_description">Description</string>
     <string name="detail_review">Review</string>
+    <string name="favorite_empty_title">Favorite</string>
+    <string name="favorite_empty_subtitle">Favorite still empty</string>
 </resources>

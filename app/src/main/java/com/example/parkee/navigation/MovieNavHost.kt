@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.parkee.ui.detail.MovieDetailRoute
+import com.example.parkee.ui.favorite.component.FavoriteRoute
 import com.example.parkee.ui.home.HomeRoute
 
 @Composable
@@ -23,7 +24,10 @@ fun MovieNavHost(navController: NavHostController = rememberNavController()) {
             )
         }
         composable<FavouriteRouteKey> {
-            // TODO: FavoriteRoute
+            FavoriteRoute(
+                onMovieClick = { navController.navigate(MovieDetailRouteKey(it)) },
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }
