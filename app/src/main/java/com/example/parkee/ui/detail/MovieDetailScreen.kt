@@ -130,10 +130,10 @@ fun MovieDetailScreen(
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                         )
                     }
-                    if (uiState.review.isEmpty()) {
+                    if (uiState.reviews.isEmpty()) {
                         item { EmptyState(stringResource(R.string.no_review)) }
                     } else {
-                        items(uiState.review, key = { it.id }) { ReviewItem(it) }
+                        items(uiState.reviews, key = { it.id }) { ReviewItem(it) }
                     }
                 }
             }

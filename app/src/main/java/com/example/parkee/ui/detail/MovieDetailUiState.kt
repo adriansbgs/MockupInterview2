@@ -8,7 +8,7 @@ sealed interface MovieDetailUiState {
     data object Loading : MovieDetailUiState
     data class Success(
         val detail: MovieDetail,
-        val review: List<Review>,
+        val reviews: List<Review>,
         val isFavorite: Boolean,
     ) : MovieDetailUiState
 
