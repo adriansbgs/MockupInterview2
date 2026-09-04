@@ -1,5 +1,7 @@
 package com.example.parkee.di
 
+import com.example.parkee.data.repository.FavoriteRepositoryImpl
+import com.example.parkee.domain.repository.FavoriteRepository
 import com.example.parkee.domain.repository.MovieRepository
 import com.example.parkee.domain.repository.MovieRepositoryImpl
 import dagger.Binds
@@ -15,4 +17,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindMovieRepository(impl: MovieRepositoryImpl): MovieRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindFavoriteRepository(impl: FavoriteRepositoryImpl): FavoriteRepository
 }
