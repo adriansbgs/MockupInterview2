@@ -2,6 +2,7 @@ package com.example.parkee.data.remote
 
 import com.example.parkee.data.remote.dto.MovieDetailDto
 import com.example.parkee.data.remote.dto.MovieListResponseDto
+import com.example.parkee.data.remote.dto.ReviewResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -37,5 +38,5 @@ interface MovieApiService {
         @Path("movie_id") movieId: Int,
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1,
-    )
+    ): ReviewResponseDto
 }
