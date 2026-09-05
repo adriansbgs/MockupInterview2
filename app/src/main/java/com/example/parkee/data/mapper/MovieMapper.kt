@@ -11,7 +11,7 @@ import com.example.parkee.domain.model.MovieDetail
 fun MovieDto.toDomain(): Movie = Movie(
     id = id,
     title = title.ifBlank { "Untitled" },
-    overview = overview.ifBlank { "No Overview" },
+    overview = overview.ifBlank { "No overview" },
     posterUrl = buildImageUrl(posterPath, ImageSize.POSTER_LIST),
     backdropUrl = buildImageUrl(backdropPath, ImageSize.BACKDROP),
     releaseDate = releaseDate.toDisplayDate(),
@@ -22,7 +22,7 @@ fun MovieDetailDto.toDomain(): MovieDetail = MovieDetail(
     movie = Movie(
         id = id,
         title = title.ifBlank { "Untitled" },
-        overview = overview.ifBlank { "No Overview" },
+        overview = overview.ifBlank { "No overview" },
         posterUrl = buildImageUrl(posterPath, ImageSize.POSTER_DETAIL),
         backdropUrl = buildImageUrl(backdropPath, ImageSize.BACKDROP),
         releaseDate = releaseDate?.toDisplayDate() ?: "-",
