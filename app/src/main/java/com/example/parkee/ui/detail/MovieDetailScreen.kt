@@ -69,6 +69,9 @@ fun MovieDetailScreen(
     modifier: Modifier = Modifier,
 ) {
     var showShareSheet by remember { mutableStateOf(false) }
+    val successState = uiState as? MovieDetailUiState.Success
+    val isFavorite = successState?.isFavorite == true
+    val movie = successState?.detail?.movie
 
     Scaffold(
         modifier = modifier,
@@ -87,6 +90,25 @@ fun MovieDetailScreen(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             stringResource(R.string.action_back)
                         )
+                    }
+                },
+                actions = {
+                    if (successState != null) {
+                        IconButton(onClick = onFavoriteClick) {
+                            Icon(
+                                imageVector = if (isFavorite) Icons.Default.Favorite
+                                else Icons.Default.FavoriteBorder,
+                                contentDescription = stringResource(
+                                    if (isFavorite) R.string.action_unfavorite
+                                    else R.string.action_favorite
+                                ),
+                                tint = if (isFavorite) MaterialTheme.colorScheme.primary
+                                else MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                        IconButton(onClick = { showShareSheet = true }) {
+                            Icon(Icons.Default.Share, stringResource(R.string.action_share))
+                        }
                     }
                 }
             )
@@ -164,40 +186,17 @@ fun MovieDetailScreen(
                     } else {
                         items(uiState.reviews, key = { it.id }) { ReviewItem(it) }
                     }
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            IconButton(onClick = onFavoriteClick) {
-                                Icon(
-                                    imageVector = if (uiState.isFavorite) Icons.Default.Favorite
-                                    else Icons.Default.FavoriteBorder,
-                                    contentDescription = stringResource(
-                                        if (uiState.isFavorite) R.string.action_unfavorite
-                                        else R.string.action_favorite
-                                    ),
-                                    tint = if (uiState.isFavorite) MaterialTheme.colorScheme.primary
-                                    else MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            IconButton(onClick = { showShareSheet = true }) {
-                                Icon(Icons.Default.Share, stringResource(R.string.action_share))
-                            }
-                            if (showShareSheet) {
-                                ShareBottomSheet(
-                                    movieTitle = uiState.detail.movie.title,
-                                    shareUrl = "https://www.themoviedb.org/movie/${uiState.detail.movie.id}",
-                                    onDismiss = { showShareSheet = false }
-                                )
-                            }
-                        }
-                    }
+
                 }
             }
         }
+    }
+    if (showShareSheet && movie != null) {
+        ShareBottomSheet(
+            movieTitle = movie.title,
+            shareUrl = "https://www.themoviedb.org/movie/${movie.id}",
+            onDismiss = { showShareSheet = false },
+        )
     }
 }
 
