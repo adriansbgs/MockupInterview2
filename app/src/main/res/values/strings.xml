@@ -28,4 +28,5 @@
     <string name="share_title">Share</string>
     <string name="share_via_app">Share via App</string>
     <string name="share_copy_link">Copy Link</string>
+    <string name="favorite_title">Favorite Movie</string>
 </resources>
