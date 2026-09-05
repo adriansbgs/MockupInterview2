@@ -3,7 +3,7 @@ package com.example.parkee.di
 import com.example.parkee.data.repository.FavoriteRepositoryImpl
 import com.example.parkee.domain.repository.FavoriteRepository
 import com.example.parkee.domain.repository.MovieRepository
-import com.example.parkee.domain.repository.MovieRepositoryImpl
+import com.example.parkee.data.repository.MovieRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

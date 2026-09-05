@@ -1,4 +1,4 @@
-package com.example.parkee.domain.repository
+package com.example.parkee.data.repository
 
 import com.example.parkee.core.common.DataResult
 import com.example.parkee.core.network.safeApiCall
@@ -7,6 +7,7 @@ import com.example.parkee.data.remote.MovieApiService
 import com.example.parkee.domain.model.Movie
 import com.example.parkee.domain.model.MovieDetail
 import com.example.parkee.domain.model.Review
+import com.example.parkee.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
