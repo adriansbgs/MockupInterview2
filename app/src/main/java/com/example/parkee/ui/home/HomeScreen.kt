@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,9 +31,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.parkee.R
 import com.example.parkee.core.common.AppError
 import com.example.parkee.core.designsystem.component.EmptyState
+import com.example.parkee.core.designsystem.component.FeaturedMovieCard
 import com.example.parkee.core.designsystem.component.InlineErrorState
 import com.example.parkee.core.designsystem.component.MovieCard
 import com.example.parkee.core.designsystem.component.MovieCarouselPlaceholder
+import com.example.parkee.core.designsystem.component.PlaceholderBox
 import com.example.parkee.core.designsystem.theme.ParkeeTheme
 import com.example.parkee.domain.model.Movie
 
@@ -56,7 +59,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item {
-                MovieCarouselSection(
+                FeaturedMovieSection(
                     title = stringResource(R.string.home_section_popular),
                     state = uiState.popular,
                     onMovieClick = onMovieClick,
@@ -172,6 +175,38 @@ private fun HomeScreenPreview() {
         )
     }
 }
+
+@Composable
+private fun FeaturedMovieSection(
+    title: String,
+    state: SectionState,
+    onMovieClick: (Int) -> Unit,
+    onRetry: () -> Unit,
+    modifier: Modifier = Modifier,
+) = SectionContainer(
+    title = title,
+    state = state,
+    onRetry = onRetry,
+    modifier = modifier,
+    loadingContent = {
+        PlaceholderBox(
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .height(200.dp)
+        )
+    },
+    successContent = { movies ->
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            items(movies, key = { it.id }) { movie ->
+                FeaturedMovieCard(movie = movie, onClick = { onMovieClick(movie.id) })
+            }
+        }
+    },
+)
 
 
 @Composable
